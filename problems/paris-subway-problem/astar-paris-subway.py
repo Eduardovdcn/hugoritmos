@@ -34,7 +34,7 @@ distances_g = {
     }
 
 
-def get_neighbors(nodes: tuple, graph: dict):
+def get_neighbors(nodes: int, graph: dict):
     if nodes in graph:
         return graph[nodes]
     else:
@@ -87,6 +87,8 @@ def astar(graph: dict, heuristic: list, start_point: tuple, stop_point: tuple):
                             final_list.remove(station)
                             frontier.append(station)
 
+            print(*frontier)
+
         if prev is None:
             print("404 Not Found")
             return None
@@ -98,10 +100,12 @@ def astar(graph: dict, heuristic: list, start_point: tuple, stop_point: tuple):
                 path.append(prev)
                 prev = parents[prev]
 
+            print(*frontier)
+
             path.append(start_point)
 
-            print(f"Path: {path.reverse()}")
-            print(f"Tempo final: {g_sum[s] + heuristic[s[0] - 1][stop_point[0] - 1]}  min")
+            print(f"Path: {path[::-1]}")
+            print(f"Tempo final: {(g_sum[s] + heuristic[s[0] - 1][stop_point[0] - 1]):.2f}  min")
 
             return path
 
@@ -114,6 +118,14 @@ def astar(graph: dict, heuristic: list, start_point: tuple, stop_point: tuple):
 
 
 def main():
-    astar(distances_g, distances_h, (6, "azul"), (13, "verde"))
+    counter = 0
+    while counter < 2:
+        x, y = input().split()
+        start_point = (int(x), y)
+        x, y = input().split()
+        stop_point = (int(x), y)
+
+        astar(distances_g, distances_h, start_point, stop_point)
+        counter += 1
 
 main()
