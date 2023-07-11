@@ -89,10 +89,6 @@ def astar(graph: dict, heuristic: list, start_point: tuple, stop_point: tuple):
 
             print(*frontier)
 
-        if prev is None:
-            print("404 Not Found")
-            return None
-
         if prev == stop_point:
 
             path = []
