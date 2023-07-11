@@ -110,7 +110,9 @@ def astar(graph: dict, heuristic: list, start_point: tuple, stop_point: tuple):
             return path
 
         frontier.remove(prev)
-        final_list.append(prev)
+
+        if graph[prev[0]] != None:
+            final_list.append(prev)
 
     print("404 Not Found, try again")
 
